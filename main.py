@@ -1,7 +1,7 @@
 import asyncio
 import logging
 
-from pyrogram import Client
+from pyrogram import Client, idle  # <--- Imported idle
 
 from bot.config import Config
 from bot.health import run_health_server
@@ -38,7 +38,7 @@ async def main():
     await app.start()
     logging.info("Video Bot started.")
     try:
-        await asyncio.Event().wait()  # run forever
+        await idle()  # <--- Replaced asyncio.Event().wait()
     finally:
         await app.stop()
         await runner.cleanup()
