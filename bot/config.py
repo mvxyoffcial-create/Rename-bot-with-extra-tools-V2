@@ -8,8 +8,7 @@
 class Config:
     # ---- Telegram API credentials (https://my.telegram.org) ----
     API_ID = 36282056                     # <-- your api_id (integer)
-    API_HASH = "3a948acece533f362b4c90b2b3c14b60"
-    "     # <-- your api_hash
+    API_HASH = "3a948acece533f362b4c90b2b3c14b60"     # <-- your api_hash
 
     # ---- Bot token (from @BotFather) ----
     BOT_TOKEN = "8285873350:AAHVx971B_3r-lJM804MkH288qqjMWHq_CI"
