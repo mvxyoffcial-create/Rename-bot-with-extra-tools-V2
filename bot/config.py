@@ -1,42 +1,46 @@
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-
-def _int(name, default=0):
-    try:
-        return int(os.environ.get(name, default))
-    except (TypeError, ValueError):
-        return default
-
-
-def _list(name):
-    raw = os.environ.get(name, "")
-    return [x.strip() for x in raw.split(",") if x.strip()]
+# ============================================================
+#  bot/config.py
+#  Hardcoded configuration — NO environment variables used.
+#  Fill in your real values below, then run: python3 main.py
+# ============================================================
 
 
 class Config:
-    API_ID = _int("API_ID")
-    API_HASH = os.environ.get("API_HASH", "")
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
+    # ---- Telegram API credentials (https://my.telegram.org) ----
+    API_ID = 36282056                     # <-- your api_id (integer)
+    API_HASH = "3a948acece533f362b4c90b2b3c14b60"
+    "     # <-- your api_hash
 
-    MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017")
-    DB_NAME = os.environ.get("DB_NAME", "videobot")
+    # ---- Bot token (from @BotFather) ----
+    BOT_TOKEN = "8285873350:AAHVx971B_3r-lJM804MkH288qqjMWHq_CI"
 
-    ADMINS = [int(x) for x in _list("ADMINS") if x.isdigit()]
+    # ---- MongoDB ----
+    MONGO_URI = "mongodb+srv://filmzi2120_db_user:zero8907@cluster0.zyau0re.mongodb.net/?appName=Cluster0"
+    DB_NAME = "videobot"
 
-    FORCE_SUB_CHANNELS = _list("FORCE_SUB_CHANNELS")
+    # ---- Admins: Telegram user IDs allowed to use admin commands ----
+    ADMINS = [8312532076]                # <-- put your Telegram user id(s) here
 
-    FREE_MAX_FILE_SIZE = _int("FREE_MAX_FILE_SIZE_MB", 2048) * 1024 * 1024
-    PREMIUM_MAX_FILE_SIZE = _int("PREMIUM_MAX_FILE_SIZE_MB", 4096) * 1024 * 1024
-    FREE_DAILY_LIMIT = _int("FREE_DAILY_LIMIT", 10)
+    # ---- Force-subscribe channels (bot must be admin in each) ----
+    # Leave as an empty list [] to disable force-subscribe.
+    FORCE_SUB_CHANNELS = ["spideyoffcail", "mvxyoffcail"]
 
-    HEALTH_PORT = _int("HEALTH_PORT", 8000)
+    # ---- File size limits (in MB) ----
+    FREE_MAX_FILE_SIZE_MB = 2048
+    PREMIUM_MAX_FILE_SIZE_MB = 4096
+    FREE_MAX_FILE_SIZE = FREE_MAX_FILE_SIZE_MB * 1024 * 1024
+    PREMIUM_MAX_FILE_SIZE = PREMIUM_MAX_FILE_SIZE_MB * 1024 * 1024
 
-    DEVELOPER_USERNAME = os.environ.get("DEVELOPER_USERNAME", "Spidey2189")
-    DOWNLOAD_DIR = os.environ.get("DOWNLOAD_DIR", "downloads")
-    WORKERS = _int("WORKERS", 500)
+    # ---- Daily free-tier usage limit ----
+    FREE_DAILY_LIMIT = 10
+
+    # ---- Health check server ----
+    HEALTH_PORT = 8000
+
+    # ---- Misc ----
+    DEVELOPER_USERNAME = "Spidey2189"
+    DOWNLOAD_DIR = "downloads"
+    WORKERS = 500
 
     # Progress bar refresh: min seconds between edits per task (Telegram rate limits)
     PROGRESS_UPDATE_INTERVAL = 3
